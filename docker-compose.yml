@@ -1,0 +1,34 @@
+version: "2"
+services:
+  rabbitmq:
+    build: ./rabbitmq
+    depends_on:
+      - "consul"
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+      - "15675:15675"
+  consul:
+    build: ./consul
+    ports:
+      - "8301:8301"
+      - "8302:8302"
+      - "8400:8400"
+      - "8500:8500"
+      - "8600:8600"
+  proxy:
+    build: ./haproxy
+    depends_on:
+      - rabbitmq
+      - frontend
+      - oikube
+    ports:
+      - "80:80"
+  frontend:
+    build: ./frontend
+    expose:
+      - "80"
+  oikube:
+    image: oikube/oikube-core
+    expose:
+      - "8080"

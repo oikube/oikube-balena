@@ -1,0 +1,1 @@
+FROM i386/consul:1.6

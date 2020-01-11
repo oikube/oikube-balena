@@ -1,0 +1,1 @@
+FROM arm32v6/consul:1.6

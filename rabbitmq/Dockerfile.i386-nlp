@@ -1,0 +1,4 @@
+FROM i386/rabbitmq:3.8-management-alpine
+
+COPY --chown=rabbitmq rabbitmq.conf /etc/rabbitmq/
+COPY enabled_plugins /etc/rabbitmq/
